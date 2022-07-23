@@ -38,16 +38,23 @@ app.get('/api/employee', (req, res) => {
   });
 });
 
-/*
+
 //Get a single employee based on their id 
-//temporarily hardcoded a id value of 1 for testing **
-db.query(`SELECT * FROM employee WHERE id = 1`, (err, row) => {
-  if (err) {
-    console.log(err);
-  }
-  console.log(row);
+app.get('/api/employee/:id', (req, res) => {
+  const sql = `SELECT * FROM employee WHERE id = ?`;
+  const params = [req.params.id];
+
+  db.query(sql, params, (err, row) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    res.json({
+      message: 'success',
+      data: row
+    });
+  });
 });
-*/
 
 /*
 // Delete a employee **set to a mock value of 1 for testing ** 
