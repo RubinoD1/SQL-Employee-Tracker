@@ -18,13 +18,50 @@ const db = mysql.createConnection(
       password: 'Ninteen84one!',
       database: 'employee'
     },
-    console.log('Connected to the election database.')
+    console.log('Connected to the employee database.')
   );
 
+/*
 //return all data from employee table
 db.query(`SELECT * FROM employee`, (err, rows) => {
     console.log(rows);
   });
+*/
+
+/*
+//Get a single employee based on their id 
+//temporarily hardcoded a id value of 1 for testing **
+db.query(`SELECT * FROM employee WHERE id = 1`, (err, row) => {
+  if (err) {
+    console.log(err);
+  }
+  console.log(row);
+});
+*/
+
+/*
+// Delete a employee **set to a mock value of 1 for testing ** 
+db.query(`DELETE FROM employee WHERE id = ?`, 1, (err, result) => {
+  if (err) {
+    console.log(err);
+  }
+  console.log(result);
+});
+*/
+
+/*
+//Create a employee
+const sql = `INSERT INTO employee (first_name, last_name) 
+              VALUES (?,?)`;
+const params = ['Daniel', 'Rubino'];
+
+db.query(sql, params, (err, result) => {
+  if (err) {
+    console.log(err);
+  }
+  console.log(result);
+});
+*/
 
 
 // Default response for any other request (Not Found)
