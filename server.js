@@ -21,12 +21,22 @@ const db = mysql.createConnection(
     console.log('Connected to the employee database.')
   );
 
-/*
+
 //return all data from employee table
-db.query(`SELECT * FROM employee`, (err, rows) => {
-    console.log(rows);
+app.get('/api/employee', (req, res) => {
+  const sql = `SELECT * FROM employee`;
+
+  db.query(sql, (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json({
+      message: 'success',
+      data: rows
+    });
   });
-*/
+});
 
 /*
 //Get a single employee based on their id 

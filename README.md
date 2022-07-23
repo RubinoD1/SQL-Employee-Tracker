@@ -48,3 +48,5 @@ G) Update an employee role
 
 
 http://localhost:3001
+
+http://localhost:3001/api/employee
