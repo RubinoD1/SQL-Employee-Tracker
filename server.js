@@ -56,15 +56,28 @@ app.get('/api/employee/:id', (req, res) => {
   });
 });
 
-/*
-// Delete a employee **set to a mock value of 1 for testing ** 
-db.query(`DELETE FROM employee WHERE id = ?`, 1, (err, result) => {
-  if (err) {
-    console.log(err);
-  }
-  console.log(result);
+
+// Delete a employee 
+app.delete('/api/employee/:id', (req, res) => {
+  const sql = `DELETE FROM employee WHERE id = ?`;
+  const params = [req.params.id];
+
+  db.query(sql, params, (err, result) => {
+    if (err) {
+      res.statusMessage(400).json({ error: res.message });
+    } else if (!result.affectedRows) {
+      res.json({
+        message: 'Employee not found'
+      });
+    } else {
+      res.json({
+        message: 'employee successfully deleted',
+        changes: result.affectedRows,
+        id: req.params.id
+      });
+    }
+  });
 });
-*/
 
 /*
 //Create a employee
