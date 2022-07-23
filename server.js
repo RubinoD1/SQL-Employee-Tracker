@@ -16,10 +16,16 @@ const db = mysql.createConnection(
       user: 'root',
       // Your MySQL password
       password: 'Ninteen84one!',
-      database: 'election'
+      database: 'employee'
     },
     console.log('Connected to the election database.')
   );
+
+//return all data from employee table
+db.query(`SELECT * FROM employee`, (err, rows) => {
+    console.log(rows);
+  });
+
 
 // Default response for any other request (Not Found)
 app.use((req, res) => {
