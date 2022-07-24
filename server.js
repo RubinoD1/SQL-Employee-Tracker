@@ -88,9 +88,9 @@ app.post('/api/employee', ({ body }, res) => {
     res.status(400).json({ error: errors });
     return;
   }
-const sql = `INSERT INTO employee (first_name, last_name)
-  VALUES (?,?)`;
-const params = [body.first_name, body.last_name];
+   const sql = `INSERT INTO employee (first_name, last_name)
+   VALUES (?,?)`;
+   const params = [body.first_name, body.last_name];
 
 db.query(sql, params, (err, result) => {
   if (err) {
