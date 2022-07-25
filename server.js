@@ -25,6 +25,71 @@ const db = mysql.createConnection(
     console.log('Connected to the employee database.')
   );
 
+
+//Start menu, lists user options. 
+const startMenu = () => {
+  return inquirer.prompt({
+      type: "list",
+      //The choices are sorted by function view, add, update, and quit.
+      choices: [
+        "View departments",
+        "View roles",
+        "View employees",
+        "Add department",
+        "Add role",
+        "Add employee",
+        "Update employee role",
+        "Quit"
+      ],
+      message: "Select a option from the menu",
+      name: "option"
+    })
+    .then(function(result) {
+    //runs related function based on user input.   
+      switch (result.option) {
+        case "View departments":
+          viewDepartment();
+          //break is need in order to prevent the other functions from triggering. 
+          break;
+        case "View roles":
+          viewRoles();
+          break;
+        case "View employees":
+          viewEmployees();
+          break;
+        case "Add department":
+          addDepartment();
+          break;
+        case "Add role":
+          addRole();
+          break;
+        case "Add employee":
+          addEmployee();
+          break;
+        case "Update employee role":
+          updateEmployee();
+          break;
+        default:
+          quit();
+      }
+  });
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
   });
+
+
+startMenu();
