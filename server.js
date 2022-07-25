@@ -21,9 +21,15 @@ const db = mysql.createConnection(
       // Your MySQL password
       password: 'Ninteen84one!',
       database: 'employee'
-    },
-    console.log('Connected to the employee database.')
-  );
+    });
+
+  db.connect(function(err) {
+    if (err) throw err;
+    console.log('Connected to the employee database.');
+  
+    startMenu();
+  });
+
 
 
 //Start menu, lists user options. 
@@ -76,6 +82,17 @@ const startMenu = () => {
 };
 
 
+function viewDepartment() {
+  // selects the department table and displays all info
+  let query = "SELECT * FROM department";
+  db.query(query, function(err, res) {
+    if (err) throw err;
+    //use console.table to display results 
+    console.table(res);
+    //return to startMenu
+    startMenu();
+  });
+};
 
 
 
@@ -92,4 +109,3 @@ app.listen(PORT, () => {
   });
 
 
-startMenu();
