@@ -3,7 +3,7 @@ const express = require('express');
 const mysql = require('mysql2');
 const inquirer = require("inquirer");
 const consoleTable = require("console.table");
-//const inputCheck = require('./utils/inputCheck');
+//const startMenu = require('./utils/startMenu');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -90,6 +90,26 @@ function viewDepartment() {
     //use console.table to display results 
     console.table(res);
     //return to startMenu
+    startMenu();
+  });
+};
+
+function viewRoles() {
+  // selects the role table and displays all info
+  let query = "SELECT * FROM role";
+  db.query(query, function(err, res) {
+    if (err) throw err;
+    console.table(res);
+    startMenu();
+  });
+};
+
+function viewEmployees() {
+  // selects the employee table and displays all info 
+  let query = "SELECT * FROM employee";
+  db.query(query, function(err, res) {
+    if (err) throw err;
+    console.table(res);
     startMenu();
   });
 };
