@@ -224,8 +224,11 @@ const addEmployee = () => {
 };
 
 
-
-
+//quits app 
+const quit = () => {
+  db.end();
+  process.exit();
+};
 
 
 
