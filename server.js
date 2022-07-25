@@ -22,7 +22,7 @@ const db = mysql.createConnection(
       password: 'Ninteen84one!',
       database: 'employee'
     });
-
+  //add SOURCE db/bb.sql query before startMenu to drop database ****
   db.connect(function(err) {
     if (err) throw err;
     console.log('Connected to the employee database.');
@@ -82,7 +82,7 @@ const startMenu = () => {
 };
 
 
-function viewDepartment() {
+const viewDepartment = () => {
   // selects the department table and displays all info
   let query = "SELECT * FROM department";
   db.query(query, function(err, res) {
@@ -94,7 +94,7 @@ function viewDepartment() {
   });
 };
 
-function viewRoles() {
+const viewRoles = () => {
   // selects the role table and displays all info
   let query = "SELECT * FROM role";
   db.query(query, function(err, res) {
@@ -104,7 +104,7 @@ function viewRoles() {
   });
 };
 
-function viewEmployees() {
+const viewEmployees = () => {
   // selects the employee table and displays all info 
   let query = "SELECT * FROM employee";
   db.query(query, function(err, res) {
@@ -114,7 +114,7 @@ function viewEmployees() {
   });
 };
 
-function addDepartment() {
+const addDepartment = () => {
   //inquirer question
   inquirer.prompt({
       type: "input",
@@ -138,6 +138,43 @@ function addDepartment() {
     })
   });
 };
+
+
+const addRole = () => {
+  inquirer.prompt([
+      {
+        type: "input",
+        message: "Enter name of role",
+        name: "roleTitle",
+        validate: roleTitleInput => {
+          if(roleTitleInput) {
+            return true;
+          } else {
+            console.log('A name must be entered for the role');
+            return false;
+          }
+        }
+      },
+      {
+        type: "input",
+        message: "What is the salary for this role?",
+        name: "salary",
+      },
+      {
+        type: "input",
+        message: "What is the department id number?",
+        name: "id",
+      }
+])
+    .then(function(answer) {
+      db.query("INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)", [answer.roleTitle, answer.salary, answer.id], function(err, res) {
+        if (err) throw err;
+        console.log(answer.roleTitle + 'added to departments.');
+        startMenu();
+      });
+    });
+};
+
 
 
 
