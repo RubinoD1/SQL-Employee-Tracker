@@ -114,6 +114,31 @@ function viewEmployees() {
   });
 };
 
+function addDepartment() {
+  //inquirer question
+  inquirer.prompt({
+      type: "input",
+      message: "Enter the name of the new department",
+      name: "department",
+      validate: departmentInput => {
+        if(departmentInput) {
+          return true;
+        } else {
+          console.log('A department name must be entered');
+          return false;
+        }
+      }
+})
+.then(function(answer){
+  //Insert into the department table the name of the new department an id will be auto-assigned 
+  db.query("INSERT INTO department (name) VALUES (?)", [answer.department] , function(err, res) {
+          if (err) throw err;
+          console.log(answer.department + 'added to departments.');
+          startMenu();
+    })
+  });
+};
+
 
 
 
