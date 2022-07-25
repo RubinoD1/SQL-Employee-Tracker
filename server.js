@@ -8,9 +8,7 @@ const consoleTable = require("console.table");
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-// Express middleware
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+
 
 // Connect to database
 const db = mysql.createConnection(
@@ -176,6 +174,54 @@ const addRole = () => {
 };
 
 
+const addEmployee = () => {
+  inquirer.prompt([
+      {
+        type: "input",
+        message: "Enter the first name of the employee",
+        name: "firstName",
+        validate: firstNameInput => {
+          if(firstNameInput) {
+            return true;
+          } else {
+            console.log('A name must be entered for the employee');
+            return false;
+          }
+        }
+      },
+      {
+        type: "input",
+        message: "Enter the last name of the employee",
+        name: "lastName",
+        validate: lastNameInput => {
+          if(lastNameInput) {
+            return true;
+          } else {
+            console.log('A last name must be entered for the employee');
+            return false;
+          }
+        }
+      },
+      {
+        type: "input",
+        message: "Enter the employee's role id number",
+        name: "roleId"
+      },
+      {
+        type: "input",
+        message: "Enter the manager id number",
+        name: "managerId"
+      }
+    ])
+    .then(function(answer) {
+
+      db.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)", [answer.firstName, answer.lastName, answer.roleId, answer.managerId], function(err, res) {
+        if (err) throw err;
+        console.log(answer.firstName + answer.lastName + ' added as a employee.');
+        startMenu();
+      });
+    });
+};
 
 
 
