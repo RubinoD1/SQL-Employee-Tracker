@@ -112,6 +112,7 @@ const viewEmployees = () => {
   });
 };
 
+//adds department to department table
 const addDepartment = () => {
   //inquirer question
   inquirer.prompt({
@@ -137,7 +138,7 @@ const addDepartment = () => {
   });
 };
 
-
+//adds role to role table 
 const addRole = () => {
   inquirer.prompt([
       {
@@ -173,7 +174,7 @@ const addRole = () => {
     });
 };
 
-
+//adds employee to employee table
 const addEmployee = () => {
   inquirer.prompt([
       {
@@ -223,16 +224,37 @@ const addEmployee = () => {
     });
 };
 
+//updates a employee by sleceting them by id then changing the value of role based on user input.
+function updateEmployee() {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        message: "Enter the id of the employee you would like to update",
+        name: "employeeUpdate"
+      },
+      {
+        type: "input",
+        message: "Enter the new role",
+        name: "updateRole"
+      }
+    ])
+    .then(function(answer) {
+   
+      db.query('UPDATE employee SET role_id=? WHERE id= ?',[answer.updateRole, answer.employeeUpdate],function(err, res) {
+        if (err) throw err;
+        console.table(res);
+        startMenu();
+      });
+    });
+};
+
 
 //quits app 
 const quit = () => {
   db.end();
   process.exit();
 };
-
-
-
-
 
 
 app.listen(PORT, () => {
