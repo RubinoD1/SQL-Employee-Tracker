@@ -5,13 +5,15 @@ GitHub Repository: https://github.com/RubinoD1/SQL-Employee-Tracker
 Video Link: 
 
 ## Introduction 
-- build a command-line application from scratch to manage a company's employee database, using Node.js, Inquirer, and MySQL.
 
-User Story
+This is a CMS that allows the user to easily view and add information to an employee database. The app was built using Node.js, Inquirer, and MySQL. It was designed so the user through a series of simple menus and prompts wouyld be able to:
 
-AS A business owner
-I WANT to be able to view and manage the departments, roles, and employees in my company
-SO THAT I can organize and plan my business
+- View all departments, roles, and employees. 
+
+- Add a department, role, or employee to the database. 
+
+- Update an employee's role. 
+
 
 ## Instructions 
 
@@ -46,7 +48,3 @@ F) Add an employee
 G) Update an employee role
 - THEN I am prompted to select an employee to update and their new role and this information is updated in the database. 
 
-
-http://localhost:3001
-
-http://localhost:3001/api/employee

@@ -3,7 +3,7 @@ const express = require('express');
 const mysql = require('mysql2');
 const inquirer = require("inquirer");
 const consoleTable = require("console.table");
-//const startMenu = require('./utils/startMenu');
+//const startMenu = require('./utils/index');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
