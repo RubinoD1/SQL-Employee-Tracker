@@ -129,7 +129,7 @@ const addDepartment = () => {
   //Insert into the department table, the name of the new department an id will be auto-assigned 
   db.query("INSERT INTO department (name) VALUES (?)", [answer.department] , function(err, res) {
           if (err) throw err;
-          console.log(answer.department + 'added to departments.');
+          console.log(answer.department + ' added to departments.');
           startMenu();
     })
   });
@@ -165,7 +165,7 @@ const addRole = () => {
     .then(function(answer) {
       db.query("INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)", [answer.roleTitle, answer.salary, answer.id], function(err, res) {
         if (err) throw err;
-        console.log(answer.roleTitle + 'added to departments.');
+        console.log(answer.roleTitle + ' added to roles.');
         startMenu();
       });
     });
@@ -240,7 +240,7 @@ function updateEmployee() {
    
       db.query('UPDATE employee SET role_id=? WHERE id= ?',[answer.updateRole, answer.employeeUpdate],function(err, res) {
         if (err) throw err;
-        console.table(res);
+        console.log('Employee updated');
         startMenu();
       });
     });
