@@ -16,7 +16,7 @@ const db = mysql.createConnection(
       password: 'Ninteen84one!',
       database: 'employee'
     });
-  //add SOURCE db/bb.sql query before startMenu to drop database ****
+  
   db.connect(function(err) {
     if (err) throw err;
     console.log('Connected to the employee database.');
