@@ -1,22 +1,18 @@
-//possibly remove express, test if needed later. **
 const express = require('express');
 const mysql = require('mysql2');
 const inquirer = require("inquirer");
 const consoleTable = require("console.table");
-//const startMenu = require('./utils/index');
+
 
 const PORT = process.env.PORT || 3001;
 const app = express();
-
 
 
 // Connect to database
 const db = mysql.createConnection(
     {
       host: 'localhost',
-      // Your MySQL username,
       user: 'root',
-      // Your MySQL password
       password: 'Ninteen84one!',
       database: 'employee'
     });
@@ -119,6 +115,7 @@ const addDepartment = () => {
       type: "input",
       message: "Enter the name of the new department",
       name: "department",
+      //validation check for user input -- cannot be a empty string
       validate: departmentInput => {
         if(departmentInput) {
           return true;
@@ -129,7 +126,7 @@ const addDepartment = () => {
       }
 })
 .then(function(answer){
-  //Insert into the department table the name of the new department an id will be auto-assigned 
+  //Insert into the department table, the name of the new department an id will be auto-assigned 
   db.query("INSERT INTO department (name) VALUES (?)", [answer.department] , function(err, res) {
           if (err) throw err;
           console.log(answer.department + 'added to departments.');
